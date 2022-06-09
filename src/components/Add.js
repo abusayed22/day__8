@@ -1,14 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { pre_post_data } from '../redux/action/action'
 
 function Add() {
-    // name:'',
-    //     roll:'',
-    //     birth:'',
-    //     phone:'',
-    //     address:''
+  const dispatch = useDispatch()
+  const [allStudents,setAllStudents] = useState({
+        name:'',
+        roll:'',
+        birth:'',
+        phone:'',
+        address:''
+  })
+    
+  const addhandler = () => {
+    dispatch(pre_post_data(allStudents));
+    setAllStudents({
+        name:'',
+        roll:'',
+        birth:'',
+        phone:'',
+        address:''
+    })
+  }
   return (
     <div>
-        {/* <center><h2>Add student</h2></center>
+        <center><h2>Add student</h2></center>
         <div style={{width:'350px',margin:'0 auto'}}>
         <form action="">
             <input style={{width:350,margin:'10px 0'}} value= {allStudents.name} onChange={(e) => setAllStudents({...allStudents,name:e.target.value})} type="text" placeholder='Enter full Name..' />
@@ -22,7 +38,7 @@ function Add() {
 
             <button onClick={() => addhandler()} style={{width:80,margin:'10px 0'}} type="button" className="btn btn-info">Add</button>
           </form>
-        </div> */}
+        </div>
     </div>
   )
 }

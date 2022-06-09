@@ -72,9 +72,9 @@ const post_data = () => {
         type:types.POST_DATA
     }
 }
-export const pre_post_data = () => {
+export const pre_post_data = (allStudents) => {
     return dispatch => {
-        axios.post("api/students/")
+        axios.post("api/students/",allStudents)
         .then(res => {
             dispatch(post_data())
         })
