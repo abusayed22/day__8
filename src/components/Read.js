@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { pre_delete_data, pre_get_data } from '../redux/action/action';
+import { RiDeleteBin2Fill } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 function Read() {
-  return (
+
+    const studentsInfo = useSelector(state => state.userInfo.users)
+const dispatch = useDispatch()
+const navigate = useNavigate()
+    useEffect(() => {
+        dispatch(pre_get_data())
+    },[studentsInfo])
+
+        // delete function area
+    const deletehandler = (id) => {
+        dispatch(pre_delete_data(id))
+    }
+  return (      
     <div>
-            {/* <center>
+            <center>
             <h3 style={{marginTop:10}}>All students</h3>
         </center>
         <div style={{width:800,margin:'0 auto'}}>
@@ -31,9 +47,13 @@ function Read() {
                 <td>{obj.phone}</td>
                 <td>{obj.address}</td>
                 <td>
+                    
                     <div style={{display:'flex',justifyContent:'center'}}>
-                    <button onClick={() => deletehandle(obj.id)} className='btn btn-danger btn-sm ' style={{marginLeft:'5px',width:60,color:'#fff'}}>Delete</button>
-                    <button onClick={()=> navigate(`/single_edit/${obj.id}`)} style={{marginLeft:'5px',width:50,color:'#fff'}} className='btn btn-info btn-sm'>Edit</button>
+
+                    <button onClick={() => deletehandler(obj.id)} className='btn btn-danger btn-sm ' style={{marginLeft:'5px',width:60,color:'#fff'}}> 
+                        Delete
+                    </button>
+                    <button onClick={() => navigate(`/single_student/${obj.id}`)} style={{marginLeft:'5px',width:50,color:'#fff'}} className='btn btn-info btn-sm'>Edit</button>
                     </div>
                 </td>
                 </tr>
@@ -41,7 +61,7 @@ function Read() {
             </tbody>
             </table>
             
-        </div> */}
+        </div>
     </div>
   )
 }
